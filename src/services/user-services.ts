@@ -4,14 +4,15 @@ import { userInfo } from "os";
 
 // Returns a user if there is a matching userid
 export async function getUserById(id: number): Promise<User> {
-    const result = await db.query(`SELECT userid, firstname, lastname, email, role
-        FROM users WHERE userId = $1`, [id]);
+    const result = await db.query(`SELECT userid, username, firstname, lastname, email, role
+                                    FROM users WHERE userId = $1`, [id]);
     return new User(result.rows[0]);
 }
 
 // Returns an array of users
 export async function getUsers(): Promise<User[]> {
-    const result = await db.query(`SELECT userid, firstname, lastname, email, role FROM users ORDER BY userid`);
+    const result = await db.query(`SELECT userid, username, firstname, lastname, email, role
+                                    FROM users ORDER BY userid`);
     return result.rows;
 
 }
